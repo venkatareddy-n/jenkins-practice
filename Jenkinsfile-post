@@ -21,6 +21,7 @@ pipeline {
     post { 
         always { 
             echo 'Always I will always say Hello again!'
+            deleteDir() //after completion of job build will delete to store the space
         }
         success { 
             echo 'Success... I will always say Hello again!'
