@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DEBUG = 'true'
+    }
     stages {
         stage('Example') {
             input {
