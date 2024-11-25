@@ -25,10 +25,10 @@ pipeline {
         }
         stage('When') {
             when {
-                branch 'main'
+                expression { env.GIT_BRANCH == 'origin/main' }   
             }
             steps {
-                echo 'Deploying in main'
+                echo 'Deploying the main branch code'
             }
         }
     }
