@@ -17,6 +17,12 @@ pipeline {
                 echo "Hello, ${PERSON}, nice to meet you."
             }
         }
+        stage('Test') {
+            steps {
+                sh 'echo This is test'
+                sh 'env'
+            }
+        }
         stage('When') {
             when {
                 branch 'main'
