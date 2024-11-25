@@ -20,7 +20,14 @@ pipeline {
     }
     post { 
         always { 
-            echo 'Successfull'
+            echo 'Always I will always say Hello again!'
         }
+        success { 
+            echo 'Success... I will always say Hello again!'
+        }
+        failure{
+            echo 'Failure... I will always say Hello again!'
+        }
+
     }
 }
