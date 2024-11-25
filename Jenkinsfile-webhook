@@ -1,0 +1,40 @@
+pipeline {
+    agent any 
+    options {
+      timeout(time: 30, unit: 'MINUTES') // max time to complete the build
+      disableConcurrentBuilds() // don't run 2 builds at a time
+      retry(2) // retry if build fails try 2 times
+    }
+
+   
+    stages {
+        stage('Build') { 
+            steps {
+                echo "Build Stage"
+            }
+        }
+        stage('Test') { 
+            steps {
+                echo "Test Stage"
+            }
+        }
+        stage('Deploy') { 
+            steps {
+               echo "Deploy Stage" 
+            }
+        }
+    }
+    post { 
+        always { 
+            echo 'Always I will always say Hello again!'
+            deleteDir() //after completion of job build will delete to store the space
+        }
+        success { 
+            echo 'Success... I will always say Hello again!'
+        }
+        failure{
+            echo 'Failure... I will always say Hello again!'
+        }
+
+    }
+}
