@@ -16,10 +16,10 @@ pipeline {
         }
         stage('When') {
             when {
-                branch 'production'
+                branch 'main'
             }
             steps {
-                echo 'Deploying'
+                echo 'Deploying in main'
             }
         }
     }
