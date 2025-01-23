@@ -1,20 +1,19 @@
 pipeline {
     agent any 
     stages {
-        stage('Build') { 
+        stage('SIT-Build') { 
             steps {
                 echo "Build Stage"
             }
         }
-        stage('Test') { 
+        stage('SIT-Test') { 
             steps {
                 echo "Test Stage"
             }
         }
-        stage('Deploy') { 
+        stage('SIT-Deploy') { 
             steps {
-               echo "Deploy Stage" 
-               echo "Deploy Stage" 
+               echo "SIT Deployment Success...." 
             }
         }
     }
