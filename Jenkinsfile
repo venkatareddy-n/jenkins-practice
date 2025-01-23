@@ -1,20 +1,19 @@
 pipeline {
     agent any 
     stages {
-        stage('Build') { 
+        stage('UAT-Build') { 
             steps {
                 echo "Build Stage"
             }
         }
-        stage('Test') { 
+        stage('UAT-Test') { 
             steps {
                 echo "Test Stage"
             }
         }
-        stage('Deploy') { 
+        stage('UAT-Deploy') { 
             steps {
-               echo "Deploy Stage" 
-               echo "Deploy Stage" 
+               echo "UAT Deployment Success...." 
             }
         }
     }
