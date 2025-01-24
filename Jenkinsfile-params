@@ -1,0 +1,8 @@
+@Library('shared-library') _ 
+
+def configmap = [
+    project: "Ericsson",
+    component: "Backend"
+]
+
+javaMavenParams(configmap)

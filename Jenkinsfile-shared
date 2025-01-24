@@ -1,2 +1,2 @@
 @Library('shared-library') _
-javaMavenBuild2()
+javaMavenBuild()
