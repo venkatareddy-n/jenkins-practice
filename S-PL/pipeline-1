@@ -1,0 +1,13 @@
+// This is Sample Sctripted pipeline
+
+node {
+    stage('Stage-1'){
+        sh 'echo "This is Stage-1"'
+    }
+    stage('Stage-2'){
+        sh 'echo "This is Stage-2"'
+    }
+    stage('Stage-3'){
+        sh 'echo "This is Stage-3"'
+    }
+}

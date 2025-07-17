@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))   // Keep only the last 10 builds
+        disableConcurrentBuilds()                        // Prevent concurrent runs
+        timeout(time: 60, unit: 'MINUTES')               // Abort pipeline after 60 minutes
+        timestamps()                                     // Add timestamps to console output
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                sh 'mvn clean package'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Fortify Scan') {
+            steps {
+                echo 'Running Fortify scan...'
+                // Replace with your actual Fortify scan commands
+                sh '/path/to/fortify/bin/sourceanalyzer -b mybuildid -clean'
+                sh '/path/to/fortify/bin/sourceanalyzer -b mybuildid -scan -f results.fpr'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                // Add your deployment commands here
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}

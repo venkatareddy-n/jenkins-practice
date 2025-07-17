@@ -1,0 +1,31 @@
+// scripted pipeline
+
+node {
+
+    def mavenHome=tool name: "maven-3.9.10"
+
+    stage('Code Checkout'){        
+        git branch: 'development', url: 'https://github.com/venkatareddy-n/java-web-app.git'
+    }
+
+    stage('Compile'){
+        sh "${mavenHome}/bin/mvn clean compile"
+    }
+
+    stage('Build'){
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+
+    stage('Sonar-Scan'){
+        sh "${mavenHome}/bin/mvn clean sonar:sonar"
+    }
+
+    stage('Nexus-Upload'){
+        sh "${mavenHome}/bin/mvn clean deploy"
+    }
+ 
+    stage('Tomcat-Deploy'){
+        sh "${mavenHome}/bin/mvn clean deploy"
+    }
+
+}
